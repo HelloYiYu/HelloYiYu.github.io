@@ -18,15 +18,15 @@
   <meta name="author" content="HelloYiYu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="stm32 cubemx configADC config1. 配置ADC channel, IN0 + IN5  2. Parameter Settings      Resolution: 12bit -&gt; 4096 max     Data Aliginment: Right alignment     Scan Conversion Mode: Enable     Continuo">
+    <meta name="description" content="stm32 cubemx configADC config 配置ADC channel, IN0 + IN5  Parameter Settings  Resolution: 12bit -&gt; 4096 max Data Aliginment: Right alignment Scan Conversion Mode: Enable Continuous Conversion Mode: D">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32ADC+DMA周期采样数据滤波">
 <meta property="og:url" content="https://helloyiyu.github.io/posts/1/index.html">
 <meta property="og:site_name" content="HelloYiYu">
-<meta property="og:description" content="stm32 cubemx configADC config1. 配置ADC channel, IN0 + IN5  2. Parameter Settings      Resolution: 12bit -&gt; 4096 max     Data Aliginment: Right alignment     Scan Conversion Mode: Enable     Continuo">
+<meta property="og:description" content="stm32 cubemx configADC config 配置ADC channel, IN0 + IN5  Parameter Settings  Resolution: 12bit -&gt; 4096 max Data Aliginment: Right alignment Scan Conversion Mode: Enable Continuous Conversion Mode: D">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-31T10:40:34.000Z">
-<meta property="article:modified_time" content="2023-10-31T11:35:31.774Z">
+<meta property="article:modified_time" content="2023-10-31T11:46:09.664Z">
 <meta property="article:author" content="HelloYiYu">
 <meta property="article:tag" content="STM32">
 <meta name="twitter:card" content="summary_large_image">
@@ -266,55 +266,41 @@
             
               <div class="markdown-body">
                 
-                <h1 id="stm32-cubemx-config"><a href="#stm32-cubemx-config" class="headerlink" title="stm32 cubemx config"></a>stm32 cubemx config</h1><h2 id="ADC-config"><a href="#ADC-config" class="headerlink" title="ADC config"></a>ADC config</h2><pre><code class="hljs">1. 配置ADC channel, IN0 + IN5
-
-2. Parameter Settings
-
-    Resolution: 12bit -&gt; 4096 max
-    Data Aliginment: Right alignment
-    Scan Conversion Mode: Enable
-    Continuous Conversion Mode: Disable
-    Discontinuous Conversion Mode: Disable
-    DMA Continuous Mode: Enable
-    End Of Conversion Selection: EOC flag at the end of all conversions
-
-    Number Of Conversion: 2
-    External Trigger Conversion Source: Timer 2 Trigger Out event
-    External Trigger Conversion Edge: Trigger detection on the rising edge
-
-    Rank 1
-        Channel: Channel 0
-        Sampling Time: 15 Cycles
-    Rank 2
-        Chennel: Channel 5
-        Sampling Time: 15 Cycles
-
-3. DMA Settings
-
-    DMA Request: ADC1
-    Stream: DMA2 Stream 0
-    Direction: Peripheral To Memory
-    Priority: Low
-</code></pre>
-<h2 id="TIM2-config"><a href="#TIM2-config" class="headerlink" title="TIM2 config"></a>TIM2 config</h2><pre><code class="hljs">1. Parameter Settings
-
-    Clocl Souce: Internal Clock
-    Trigger Event Selection: Update Event
-</code></pre>
-<h1 id="Init-Code"><a href="#Init-Code" class="headerlink" title="Init Code"></a>Init Code</h1><pre><code class="hljs">1. TIM2
-</code></pre>
+                <h1 id="stm32-cubemx-config"><a href="#stm32-cubemx-config" class="headerlink" title="stm32 cubemx config"></a>stm32 cubemx config</h1><h2 id="ADC-config"><a href="#ADC-config" class="headerlink" title="ADC config"></a>ADC config</h2><ol>
+<li><p>配置ADC channel, IN0 + IN5</p>
+</li>
+<li><p>Parameter Settings</p>
+<p> Resolution: 12bit -&gt; 4096 max<br> Data Aliginment: Right alignment<br> Scan Conversion Mode: Enable<br> Continuous Conversion Mode: Disable<br> Discontinuous Conversion Mode: Disable<br> DMA Continuous Mode: Enable<br> End Of Conversion Selection: EOC flag at the end of all conversions</p>
+<p> Number Of Conversion: 2<br> External Trigger Conversion Source: Timer 2 Trigger Out event<br> External Trigger Conversion Edge: Trigger detection on the rising edge</p>
+<p> Rank 1<br> Channel: Channel 0<br> Sampling Time: 15 Cycles<br> Rank 2<br> Chennel: Channel 5<br> Sampling Time: 15 Cycles</p>
+</li>
+<li><p>DMA Settings</p>
+<p> DMA Request: ADC1<br> Stream: DMA2 Stream 0<br> Direction: Peripheral To Memory<br> Priority: Low</p>
+</li>
+</ol>
+<h2 id="TIM2-config"><a href="#TIM2-config" class="headerlink" title="TIM2 config"></a>TIM2 config</h2><ol>
+<li><p>Parameter Settings</p>
+<p> Clocl Souce: Internal Clock<br> Trigger Event Selection: Update Event</p>
+</li>
+</ol>
+<h1 id="Init-Code"><a href="#Init-Code" class="headerlink" title="Init Code"></a>Init Code</h1><ol>
+<li>TIM2</li>
+</ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">MX_TIM2_Init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>  TIM_ClockConfigTypeDef sClockSourceConfig = &#123;<span class="hljs-number">0</span>&#125;;<br>  TIM_MasterConfigTypeDef sMasterConfig = &#123;<span class="hljs-number">0</span>&#125;;<br><br>  htim2.Instance = TIM2;<br>  htim2.Init.Prescaler = <span class="hljs-number">41</span>;<br>  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;<br>  htim2.Init.Period = <span class="hljs-number">49</span>;<br>  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;<br>  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;<br>  <span class="hljs-keyword">if</span> (HAL_TIM_Base_Init(&amp;htim2) != HAL_OK)<br>  &#123;<br>    Error_Handler();<br>  &#125;<br>  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;<br>  <span class="hljs-keyword">if</span> (HAL_TIM_ConfigClockSource(&amp;htim2, &amp;sClockSourceConfig) != HAL_OK)<br>  &#123;<br>    Error_Handler();<br>  &#125;<br>  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;<br>  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;<br>  <span class="hljs-keyword">if</span> (HAL_TIMEx_MasterConfigSynchronization(&amp;htim2, &amp;sMasterConfig) != HAL_OK)<br>  &#123;<br>    Error_Handler();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<pre><code class="hljs">2. ADC
-</code></pre>
+<ol start="2">
+<li>ADC</li>
+</ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">MX_ADC1_Init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>  ADC_AnalogWDGConfTypeDef AnalogWDGConfig = &#123;<span class="hljs-number">0</span>&#125;;<br>  ADC_ChannelConfTypeDef sConfig = &#123;<span class="hljs-number">0</span>&#125;;<br><br>  <span class="hljs-comment">/** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)</span><br><span class="hljs-comment">  */</span><br>  hadc1.Instance = ADC1;<br>  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;<br>  hadc1.Init.Resolution = ADC_RESOLUTION_12B;<br>  hadc1.Init.ScanConvMode = ENABLE;<br>  hadc1.Init.ContinuousConvMode = DISABLE;<br>  hadc1.Init.DiscontinuousConvMode = DISABLE;<br>  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;<br>  hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_T2_TRGO;<br>  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;<br>  hadc1.Init.NbrOfConversion = <span class="hljs-number">2</span>;<br>  hadc1.Init.DMAContinuousRequests = ENABLE;<br>  hadc1.Init.EOCSelection = ADC_EOC_SEQ_CONV;<br>  <span class="hljs-keyword">if</span> (HAL_ADC_Init(&amp;hadc1) != HAL_OK)<br>  &#123;<br>    Error_Handler();<br>  &#125;<br><br>  <span class="hljs-comment">/** Configure the analog watchdog</span><br><span class="hljs-comment">  */</span><br>  AnalogWDGConfig.WatchdogMode = ADC_ANALOGWATCHDOG_SINGLE_REG;<br>  AnalogWDGConfig.HighThreshold = <span class="hljs-number">3723</span>;<br>  AnalogWDGConfig.LowThreshold = <span class="hljs-number">0</span>;<br>  AnalogWDGConfig.Channel = ADC_CHANNEL_0;<br>  AnalogWDGConfig.ITMode = ENABLE;<br>  <span class="hljs-keyword">if</span> (HAL_ADC_AnalogWDGConfig(&amp;hadc1, &amp;AnalogWDGConfig) != HAL_OK)<br>  &#123;<br>    Error_Handler();<br>  &#125;<br><br>  <span class="hljs-comment">/** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.</span><br><span class="hljs-comment">  */</span><br>  sConfig.Channel = ADC_CHANNEL_0;<br>  sConfig.Rank = <span class="hljs-number">1</span>;<br>  sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;<br>  <span class="hljs-keyword">if</span> (HAL_ADC_ConfigChannel(&amp;hadc1, &amp;sConfig) != HAL_OK)<br>  &#123;<br>    Error_Handler();<br>  &#125;<br><br>  <span class="hljs-comment">/** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.</span><br><span class="hljs-comment">  */</span><br>  sConfig.Channel = ADC_CHANNEL_5;<br>  sConfig.Rank = <span class="hljs-number">2</span>;<br>  <span class="hljs-keyword">if</span> (HAL_ADC_ConfigChannel(&amp;hadc1, &amp;sConfig) != HAL_OK)<br>  &#123;<br>    Error_Handler();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h1 id="User-Code"><a href="#User-Code" class="headerlink" title="User Code"></a>User Code</h1><pre><code class="hljs">1. Create Data Buffer and start ADC
-</code></pre>
+<h1 id="User-Code"><a href="#User-Code" class="headerlink" title="User Code"></a>User Code</h1><ol>
+<li>Create Data Buffer and start ADC</li>
+</ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">uint16_t</span> adc_raw[<span class="hljs-number">256</span>];<br><br>HAL_ADC_Start_DMA(&amp;hadc1, (<span class="hljs-type">uint32_t</span> *)adc_raw, <span class="hljs-number">200</span>);<br>HAL_TIM_Base_Start(&amp;htim2);<br></code></pre></td></tr></table></figure>
 
-<pre><code class="hljs">2. ADC Done callback
-</code></pre>
+<ol start="2">
+<li>ADC Done callback</li>
+</ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">uint32_t</span> Channel_i_value, Channel_v_value;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">HAL_ADC_ConvCpltCallback</span><span class="hljs-params">(ADC_HandleTypeDef* hadc)</span><br>&#123;<br>    <span class="hljs-comment">/* 200个数据，两通道各100次采样，取64次（前后各丢18次）*/</span><br>    <span class="hljs-type">int</span> drop_count = <span class="hljs-number">18</span>;<br>    <span class="hljs-type">int</span> total_count = <span class="hljs-number">100</span>;<br>    <span class="hljs-type">int</span> shift = <span class="hljs-number">6</span>;  <span class="hljs-comment">// 64 = 2^6</span><br><br>    <span class="hljs-type">uint16_t</span> max_i = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">uint16_t</span> min_i = <span class="hljs-number">0xFFFF</span>;<br>    <span class="hljs-type">uint16_t</span> max_v = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">uint16_t</span> min_v = <span class="hljs-number">0xFFFF</span>;<br>    <span class="hljs-type">int</span> max_i_index, min_i_index, max_v_index, min_v_index;<br>    <span class="hljs-type">uint32_t</span> sum_raw;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> i_raw(index) (raw[2 * (index) + 0])</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> v_raw(index) (raw[2 * (index) + 1])</span><br><br>    <span class="hljs-comment">/* 排序 */</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; drop_count; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = i; j &lt; (total_count - i); j++) &#123;<br>            <span class="hljs-keyword">if</span> (max_i &lt; i_raw(j)) &#123;<br>                max_i = i_raw(j);<br>                max_i_index = j;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (min_i &gt; i_raw(j)) &#123;<br>                min_i = i_raw(j);<br>                min_i_index = j;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (max_v &lt; v_raw(j)) &#123;<br>                max_v = v_raw(j);<br>                max_v_index = j;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (min_v &gt; v_raw(j)) &#123;<br>                min_v = v_raw(j);<br>                min_v_index = j;<br>            &#125;<br>        &#125;<br>        max_i = i_raw(max_i_index);<br>        i_raw(max_i_index) = i_raw(i);<br>        i_raw(i) = max_i;<br>        min_i = i_raw(min_i_index);<br>        i_raw(min_i_index) = i_raw(total_count - i);<br>        i_raw(total_count - i) = min_i;<br>        max_v = v_raw(max_v_index);<br>        v_raw(max_v_index) = v_raw(i);<br>        v_raw(i) = max_v;<br>        min_v = v_raw(min_v_index);<br>        v_raw(min_v_index) = v_raw(total_count - i);<br>        v_raw(total_count - i) = min_v;<br>    &#125;<br><br>    <span class="hljs-comment">/* 中位平均 */</span><br>    sum_raw = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = drop_count; i &lt; (total_count - drop_count); i++)<br>        sum_raw += i_raw(i);<br><br>    <span class="hljs-comment">// Channel 0 value for current</span><br>    Channel_i_value = sum_raw &gt;&gt; shift;<br><br>    sum_raw = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = drop_count; i &lt; (total_count - drop_count); i++)<br>        sum_raw += v_raw(i);<br><br>    <span class="hljs-comment">// Channel 5 value for voltage</span><br>    Channel_v_value = sum_raw &gt;&gt; shift;<br><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> i_raw</span><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> v_raw</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 
